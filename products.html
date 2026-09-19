@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<title>متجر</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="styles.css?v=20260919b" rel="stylesheet">
+</head>
+<body>
+<header class="nav-wrap"><nav class="nav-pill" id="mainNav">
+<a class="nav-pill-brand" href="index.html" data-brand-logo><span data-brand>محرك مصران</span></a>
+<div class="nav-pill-links" id="navLinks"><span class="nav-indicator" id="navIndicator"></span>
+<a class="nav-pill-link" href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+<a class="nav-pill-link" href="content.html"><i class="fas fa-play-circle"></i> المحتوى</a>
+<a class="nav-pill-link" href="products.html"><i class="fas fa-store"></i> المتجر</a>
+<a class="nav-pill-link" href="engine.html"><i class="fas fa-download"></i> تحميل المحرك</a>
+<a class="nav-pill-link" href="support.html"><i class="fas fa-headset"></i> الدعم</a>
+</div>
+<button type="button" class="nav-pill-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+</nav></header>
+<main class="page-fade container py-4">
+<div class="store-search-wrap mb-3">
+  <div class="store-search">
+    <i class="fas fa-search"></i>
+    <input type="search" id="search" placeholder="ابحث في المنتجات والألعاب…" autocomplete="off" enterkeyhint="search">
+  </div>
+</div>
+<h1 class="h4 section-title mb-3">المتجر</h1>
+<div class="content-layout">
+  <div>
+    <section class="store-section mb-4">
+      <h2 class="h5 mb-2 store-sec-title"><i class="fas fa-box me-1"></i> المنتجات</h2>
+      <div id="productFilters" class="store-inline-filters mb-2"></div>
+      <div class="row g-3" id="gridProducts"></div>
+      <div class="pager" id="pagerProducts"></div>
+    </section>
+    <section class="store-section mb-4">
+      <h2 class="h5 mb-2 store-sec-title"><i class="fas fa-gamepad me-1"></i> الألعاب</h2>
+      <div id="gameFilters" class="store-inline-filters mb-2"></div>
+      <div class="row g-3" id="gridGames"></div>
+      <div class="pager" id="pagerGames"></div>
+    </section>
+  </div>
+  <aside class="filter-col" id="storeFilters"></aside>
+</div>
+</main>
+
+<!-- call fab removed; use float phone -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script id="SITE_DATA_BLOCK">
+window.SITE_DATA = {
+  "version": 3,
+  "updatedAt": "2026-09-19T09:46:34.343Z",
+  "site": {
+    "name": "كودك في الهواء",
+    "brand": "كودك في الهواء",
+    "logoUrl": "https://drive.google.com/file/d/1BeYNZFPozrxAs73NVXSL_aILVDyXesKk/view?usp=sharing",
+    "supportPhone": "",
+    "floatButtons": {
+      "phone": "",
+      "youtube": "",
+      "facebook": "",
+      "intro": "",
+      "custom": []
+    },
+    "paymentText": "",
+    "engine": {
+      "name": "محرك مصران",
+      "version": "",
+      "downloadUrl": "",
+      "thumbUrl": "",
+      "description": ""
+    },
+    "news": [],
+    "home": {
+      "heroTitle": "محرك مصران",
+      "heroSubtitle": "إبداع ذهبي بمعايير فرعونية",
+      "heroText": "منصة مصرية فاخرة للمنتجات الرقمية والمحتوى.",
+      "btnProducts": "تصفح المنتجات",
+      "btnContent": "المحتوى",
+      "btnEngine": "تحميل المحرك",
+      "productsSectionTitle": "أحدث المنتجات",
+      "card1Title": "منتجات",
+      "card2Title": "محتوى",
+      "card3Title": "موثوق"
+    },
+    "about": {
+      "title": "لماذا محرك مصران؟",
+      "subtitle": "منتجات · محتوى · محرك · دعم",
+      "imageUrl": "",
+      "description": "منصة مصرية للمنتجات الرقمية والمحتوى.",
+      "f1Title": "منتجات",
+      "f1Text": "مجاني ومدفوع.",
+      "f2Title": "محتوى",
+      "f2Text": "فيسبوك ويوتيوب.",
+      "f3Title": "المحرك",
+      "f3Text": "تحميل مباشر."
+    }
+  },
+  "products": [],
+  "content": {
+    "facebook": [],
+    "youtube": []
+  },
+  "playlists": [],
+  "activations": [],
+  "entitlements": {},
+  "paymentText": "",
+  "site_float_placeholder": true,
+  "storeFilters": [],
+  "gameFilters": [],
+  "producers": []
+};
+</script><script>
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function driveDl(u){if(!u)return'';var m=String(u).match(/\/file\/d\/([\w-]+)/)||String(u).match(/[?&]id=([\w-]+)/);return m?'https://drive.google.com/uc?export=download&id='+m[1]:u;}
+
+
+/* ===== تحميل ذهبي مع نسبة مئوية — بدون فتح أي رابط ===== */
+function ensureDlModal(){
+  var bg=document.getElementById('dlModalBg');
+  if(bg) return bg;
+  bg=document.createElement('div');
+  bg.id='dlModalBg';
+  bg.className='dl-modal-bg';
+  bg.innerHTML=
+    '<div class="dl-modal" role="dialog" aria-modal="true">'+
+      '<div class="dl-modal-icon"><i class="fas fa-download"></i></div>'+
+      '<div class="dl-modal-title" id="dlModalTitle">جاري التحميل</div>'+
+      '<div class="dl-modal-sub" id="dlModalSub"></div>'+
+      '<div class="dl-track"><div class="dl-fill" id="dlFill"></div></div>'+
+      '<div class="dl-pct" id="dlPct">0%</div>'+
+      '<div class="dl-modal-hint" id="dlHint">لا تغلق الصفحة حتى يكتمل التحميل</div>'+
+    '</div>';
+  document.body.appendChild(bg);
+  return bg;
+}
+function setDlProgress(p){
+  p=Math.max(0,Math.min(100,Math.round(p)));
+  var fill=document.getElementById('dlFill');
+  var pct=document.getElementById('dlPct');
+  if(fill) fill.style.width=p+'%';
+  if(pct) pct.textContent=p+'%';
+}
+function closeDlModal(delay){
+  setTimeout(function(){
+    var bg=document.getElementById('dlModalBg');
+    if(bg) bg.classList.remove('open');
+    setDlProgress(0);
+  }, delay||400);
+}
+function triggerBlobDownload(blob, filename){
+  var a=document.createElement('a');
+  var u=URL.createObjectURL(blob);
+  a.href=u;
+  a.download=filename||'download';
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ URL.revokeObjectURL(u); a.remove(); }, 2000);
+}
+/** تحميل صامت بدون فتح تبويب أو تغيير الصفحة */
+function silentUrlDownload(url, filename){
+  // 1) محاولة رابط بنفس الصفحة بدون target
+  try{
+    var a=document.createElement('a');
+    a.href=url;
+    a.setAttribute('download', filename||'file');
+    a.style.display='none';
+    a.rel='noopener';
+    // ممنوع target=_blank عشان ميفتحش درايف
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ a.remove(); }, 1000);
+  }catch(e){}
+  // 2) iframe مخفي كاحتياطي (يفضل التحميل بدون ما المستخدم يشوف الصفحة)
+  try{
+    var old=document.getElementById('silentDlFrame');
+    if(old) old.remove();
+    var ifr=document.createElement('iframe');
+    ifr.id='silentDlFrame';
+    ifr.style.cssText='position:fixed;width:0;height:0;border:0;opacity:0;pointer-events:none;left:-9999px;top:-9999px';
+    ifr.setAttribute('aria-hidden','true');
+    ifr.src=url;
+    document.body.appendChild(ifr);
+    setTimeout(function(){ try{ ifr.remove(); }catch(e){} }, 60000);
+  }catch(e){}
+}
+function guessFilename(url, title){
+  if(title){
+    var t=String(title).replace(/[\\/:*?"<>|]+/g,'_').trim();
+    if(t && t!=='تحميل' && t.indexOf('fa-')<0) return t;
+  }
+  try{
+    var u=new URL(url, location.href);
+    var last=(u.pathname.split('/').pop()||'').split('?')[0];
+    if(last && last.indexOf('.')>0) return decodeURIComponent(last);
+  }catch(e){}
+  return 'download';
+}
+function driveDirectUrl(u){
+  if(!u) return '';
+  u=String(u);
+  var m=u.match(/\/file\/d\/([\w-]+)/)||u.match(/[?&]id=([\w-]+)/);
+  if(m){
+    var id=m[1];
+    // رابط تحميل مباشر قدر الإمكان بدون صفحة معاينة
+    return 'https://drive.usercontent.google.com/download?id='+id+'&export=download&confirm=t';
+  }
+  if(typeof driveDl==='function') return driveDl(u);
+  return u;
+}
+/** نافذة تحميل ذهبية — بدون التنقل لأي رابط */
+function goldenDownload(url, title){
+  if(!url){ if(typeof toast==='function') toast('لا يوجد رابط تحميل'); return; }
+  var raw=url;
+  url=driveDirectUrl(url);
+  var name=guessFilename(url, title);
+  var bg=ensureDlModal();
+  document.getElementById('dlModalTitle').textContent='جاري التحميل';
+  document.getElementById('dlModalSub').textContent=title||name;
+  document.getElementById('dlHint').textContent='التحميل داخل الموقع — بدون فتح روابط';
+  setDlProgress(0);
+  bg.classList.add('open');
+
+  var finished=false;
+  function doneOk(){
+    if(finished) return;
+    finished=true;
+    setDlProgress(100);
+    document.getElementById('dlModalTitle').textContent='تم التحميل';
+    document.getElementById('dlHint').textContent='اكتمل بنجاح';
+    closeDlModal(900);
+  }
+  function doneSilent(){
+    if(finished) return;
+    finished=true;
+    setDlProgress(100);
+    document.getElementById('dlModalTitle').textContent='تم بدء التحميل';
+    document.getElementById('dlHint').textContent='الملف بينزل على جهازك';
+    silentUrlDownload(url, name);
+    closeDlModal(1200);
+  }
+
+  try{
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType='blob';
+    xhr.withCredentials=false;
+    xhr.onprogress=function(e){
+      if(e.lengthComputable && e.total>0){
+        setDlProgress((e.loaded/e.total)*100);
+      } else if(e.loaded){
+        var cur=parseInt((document.getElementById('dlPct').textContent||'0'),10)||0;
+        if(cur<90) setDlProgress(Math.min(90, cur+2));
+      }
+    };
+    xhr.onload=function(){
+      if(xhr.status>=200 && xhr.status<300 && xhr.response){
+        var type=(xhr.getResponseHeader('Content-Type')||'').toLowerCase();
+        // لو رجع HTML (صفحة تأكيد درايف) نكمل صامت بدون فتح تبويب
+        if(type.indexOf('text/html')>=0 || (xhr.response.size && xhr.response.size<5000 && type.indexOf('application')<0 && type.indexOf('zip')<0 && type.indexOf('octet')<0)){
+          // جرب الرابط الأصلي uc كمان صامت
+          silentUrlDownload(url, name);
+          doneOk();
+          return;
+        }
+        var disp=xhr.getResponseHeader('Content-Disposition')||'';
+        var m=disp.match(/filename\*?=(?:UTF-8''|")?([^\";]+)/i);
+        var fn=name;
+        if(m&&m[1]) try{ fn=decodeURIComponent(m[1].replace(/"/g,'').trim()); }catch(e){}
+        triggerBlobDownload(xhr.response, fn);
+        doneOk();
+      } else {
+        doneSilent();
+      }
+    };
+    xhr.onerror=function(){ doneSilent(); };
+    xhr.ontimeout=function(){ doneSilent(); };
+    xhr.timeout=180000;
+    xhr.send();
+
+    var fake=6;
+    var iv=setInterval(function(){
+      if(finished){ clearInterval(iv); return; }
+      var cur=parseInt((document.getElementById('dlPct').textContent||'0'),10)||0;
+      if(cur<88){
+        fake += Math.max(1, Math.round((90-fake)*0.045));
+        if(cur<fake) setDlProgress(fake);
+      }
+    }, 180);
+  }catch(err){
+    doneSilent();
+  }
+}
+window.goldenDownload = goldenDownload;
+
+function wireGoldenDownloads(root){
+  root = root || document;
+  // فقط روابط التحميل الحقيقية — مش كل الأزرار
+  var nodes = root.querySelectorAll('a[download], a#engDl, a[href*="export=download"], a[href*="drive.google.com"], a[href*="drive.usercontent"], a[href*="uc?export"], [data-download-url]');
+  nodes.forEach(function(a){
+    if(a._goldDl) return;
+    var href=(a.getAttribute('href')||a.getAttribute('data-download-url')||'').trim();
+    if(!href || href==='#' || href.indexOf('javascript:')===0) return;
+    // تجاهل صفحات الموقع الداخلية
+    if(/\.html($|\?|#)/i.test(href) && href.indexOf('drive')<0 && href.indexOf('export')<0 && href.indexOf('usercontent')<0) return;
+    a._goldDl=1;
+    a.removeAttribute('target');
+    a.addEventListener('click', function(e){
+      var u=(a.getAttribute('href')||a.getAttribute('data-download-url')||'').trim();
+      if(!u || u==='#') return;
+      e.preventDefault();
+      e.stopPropagation();
+      var title=(a.getAttribute('data-dl-title')||a.getAttribute('title')||'').replace(/\s+/g,' ').trim();
+      if(!title) title=(a.textContent||'').replace(/\s+/g,' ').trim();
+      if(title.length>60) title=title.slice(0,57)+'…';
+      goldenDownload(u, title);
+    });
+  });
+}
+
+
+
+function driveView(u){if(!u)return'';var m=String(u).match(/\/file\/d\/([\w-]+)/)||String(u).match(/[?&]id=([\w-]+)/);return m?'https://drive.google.com/thumbnail?id='+m[1]+'&sz=w800':u;}
+function site(){return (window.SITE_DATA&&SITE_DATA.site)||{};}
+function q(n){return new URLSearchParams(location.search).get(n);}
+function findById(id){
+  var d=window.SITE_DATA||{},x;
+  x=(d.products||[]).find(function(p){return p.id===id;});if(x)return{type:'product',item:x};
+  x=((d.content||{}).facebook||[]).find(function(p){return p.id===id;});if(x)return{type:'facebook',item:x};
+  x=((d.content||{}).youtube||[]).find(function(p){return p.id===id;});if(x)return{type:'youtube',item:x};
+  x=(d.playlists||[]).find(function(p){return p.id===id;});if(x)return{type:'playlist',item:x};
+  return null;
+}
+function linkify(text){
+  return esc(text||'').replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+}
+function storeName(){ var s=site(); return s.name||s.brand||'محرك مصران'; }
+function storeLabel(){ return 'المتجر'; }
+function setFavicon(url){
+  if(!url) return;
+  var href=driveView(url);
+  var link=document.querySelector("link[rel='icon']")||document.createElement('link');
+  link.rel='icon'; link.href=href; if(!link.parentNode) document.head.appendChild(link);
+}
+function ensureCurtain(){
+  if(document.getElementById('pageCurtain')) return;
+  var el=document.createElement('div'); el.id='pageCurtain'; el.className='page-curtain';
+  el.innerHTML='<div class="page-curtain-panel"></div><div class="page-curtain-inner"><div id="curtainLogoWrap"></div><div class="page-curtain-name" id="curtainName"></div><div class="page-curtain-line"></div><div class="page-curtain-sub">جاري الانتقال</div></div>';
+  document.body.appendChild(el);
+}
+function playCurtain(then){
+  ensureCurtain(); var s=site(), el=document.getElementById('pageCurtain');
+  document.getElementById('curtainName').textContent=storeName();
+  var lw=document.getElementById('curtainLogoWrap');
+  if(s.logoUrl) lw.innerHTML='<img class="page-curtain-logo" src="'+esc(driveView(s.logoUrl))+'" alt="">';
+  else lw.innerHTML='<i class="fas fa-ankh" style="font-size:2.2rem;color:#e8c547;margin-bottom:.75rem;display:block"></i>';
+  el.classList.remove('out'); el.classList.add('on');
+  setTimeout(function(){ if(then) then(); setTimeout(function(){ el.classList.add('out'); setTimeout(function(){ el.classList.remove('on','out'); },380); },120); },380);
+}
+
+function glassModal(title, html){
+  var bd=document.getElementById('glassBd');
+  if(!bd){
+    bd=document.createElement('div'); bd.id='glassBd'; bd.className='glass-modal-backdrop';
+    bd.innerHTML='<div class="glass-modal" role="dialog"><div class="d-flex justify-content-between align-items-start gap-2 mb-2"><h3 id="glassTitle"></h3><button type="button" class="btn btn-sm btn-outline-secondary" id="glassClose">إغلاق</button></div><div id="glassBody"></div></div>';
+    document.body.appendChild(bd);
+    bd.addEventListener('click',function(e){ if(e.target===bd) bd.classList.remove('open'); });
+    document.getElementById('glassClose').onclick=function(){ bd.classList.remove('open'); };
+  }
+  document.getElementById('glassTitle').textContent=title||'';
+  document.getElementById('glassBody').innerHTML=html||'';
+  bd.classList.add('open');
+}
+
+
+function copyText(t, btn){
+  t=String(t||'');
+  function ok(){ if(btn){ btn.classList.add('ok'); btn.innerHTML='<i class="fas fa-check"></i>'; setTimeout(function(){ btn.classList.remove('ok'); btn.innerHTML='<i class="fas fa-copy"></i>'; },1200);} }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(ok).catch(function(){ fallback(); });
+  } else fallback();
+  function fallback(){
+    var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+    try{ document.execCommand('copy'); ok(); }catch(e){}
+    document.body.removeChild(a);
+  }
+}
+function idCopyHtml(id){
+  return '<span class="id-with-copy"><code class="mono" style="direction:ltr">'+esc(id)+'</code> <button type="button" class="btn-copy-id" title="نسخ" data-copy="'+esc(id)+'"><i class="fas fa-copy"></i></button></span>';
+}
+function wireCopy(root){
+  (root||document).querySelectorAll('[data-copy]').forEach(function(b){
+    if(b._copyBound) return; b._copyBound=true;
+    b.onclick=function(e){ e.preventDefault(); e.stopPropagation(); copyText(b.getAttribute('data-copy'), b); };
+  });
+}
+
+function deviceId(){
+  var k='misran_device_id', ko='misran_device_id_original';
+  try{
+    var v=localStorage.getItem(k);
+    if(v&&v.length>10) return v;
+    var id='u_'+Array.from(crypto.getRandomValues(new Uint8Array(16))).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+    localStorage.setItem(k,id);
+    if(!localStorage.getItem(ko)) localStorage.setItem(ko,id);
+    return id;
+  }catch(e){
+    return 'u_tmp_'+Date.now().toString(36)+Math.random().toString(36).slice(2);
+  }
+}
+function userEntitlements(){
+  var d=window.SITE_DATA||{};
+  var map=d.entitlements||{};
+  return map[deviceId()]||[];
+}
+function userOwns(productId){
+  return userEntitlements().indexOf(productId)>=0;
+}
+
+function renderUserChip(){
+  var old=document.getElementById('userChip'); if(old) old.remove();
+  var id=deviceId();
+  var chip=document.createElement('div');
+  chip.id='userChip'; chip.className='user-chip';
+  chip.innerHTML=
+    '<div class="user-chip-inner">'+
+      '<div class="user-avatar"><i class="fas fa-user"></i></div>'+
+      '<span class="user-badge">منشئ</span>'+
+      '<span class="id-with-copy"><span class="user-id" id="idText"></span>'+
+      '<button type="button" class="btn-copy-id" id="btnCopyId" title="نسخ ID"><i class="fas fa-copy"></i></button></span>'+
+      '<button type="button" class="btn-copy-id" id="btnGear" title="الحساب"><i class="fas fa-cog"></i></button>'+
+      '<button type="button" class="btn btn-outline-secondary btn-sm" id="btnMyProducts">منتجاتي</button>'+
+    '</div>'+
+    '<button type="button" class="user-chip-toggle" id="btnChipToggle" title="عرض حسابي"><i class="fas fa-chevron-left"></i><span class="chip-toggle-label">عرض حسابي</span></button>';
+  document.body.appendChild(chip);
+  document.getElementById('idText').textContent=id;
+  document.getElementById('btnCopyId').setAttribute('data-copy', id);
+  document.getElementById('btnCopyId').onclick=function(){ copyText(id, this); };
+
+  function applyCollapsed(on){
+    chip.classList.toggle('collapsed', !!on);
+    var ic=chip.querySelector('#btnChipToggle i');
+    var lab=chip.querySelector('.chip-toggle-label');
+    if(ic) ic.className = on ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
+    if(lab) lab.style.display = on ? '' : 'none';
+    try{ localStorage.setItem('misran_chip_collapsed', on ? '1' : '0'); }catch(e){}
+  }
+  // حالة محلية فقط — ثابتة بين الصفحات بدون session/nav
+  var wasClosed = false;
+  try{ wasClosed = localStorage.getItem('misran_chip_collapsed') === '1'; }catch(e){}
+  applyCollapsed(wasClosed);
+  document.getElementById('btnChipToggle').onclick=function(e){
+    e.preventDefault(); e.stopPropagation();
+    applyCollapsed(!chip.classList.contains('collapsed'));
+  };
+
+
+  document.getElementById('btnGear').onclick=function(){
+    glassModal('الحساب والإعدادات',
+      '<div class="glass-row mb-2"><div class="small text-muted mb-1">ID الحساب</div>'+idCopyHtml(deviceId())+'</div>'+
+      '<div class="glass-row"><div class="small text-muted mb-1">تسجيل الدخول بـ ID آخر</div>'+
+      '<input class="form-control mb-2" id="switchIdInput" placeholder="اكتب ID" style="direction:ltr">'+
+      '<button type="button" class="btn btn-warning btn-sm" id="btnSwitchId">تأكيد</button></div>'+
+      '<div class="glass-row mt-2"><button type="button" class="btn btn-outline-secondary btn-sm w-100" id="btnRestoreId">تفعيل ID الجهاز الأصلي</button></div>'
+    );
+    setTimeout(function(){ wireCopy(document.getElementById('glassBd')); },0);
+    document.getElementById('btnSwitchId').onclick=function(){
+      var v=(document.getElementById('switchIdInput').value||'').trim();
+      if(!v){ toast('اكتب ID'); return; }
+      if(!isValidSiteId(v)){ toast('لا وجود لهذا الـ ID'); return; }
+      originalDeviceId();
+      setActiveDeviceId(v);
+      document.getElementById('glassBd').classList.remove('open');
+      toast('تم تغيير الحساب');
+      renderUserChip();
+    };
+    document.getElementById('btnRestoreId').onclick=function(){
+      var o=originalDeviceId();
+      setActiveDeviceId(o);
+      document.getElementById('glassBd').classList.remove('open');
+      toast('تم استعادة ID الجهاز الأصلي');
+      renderUserChip();
+    };
+  };
+  document.getElementById('btnMyProducts').onclick=function(){
+    var ids=userEntitlements();
+    var prods=(SITE_DATA.products||[]).filter(function(p){return ids.indexOf(p.id)>=0;});
+    if(!prods.length){ glassModal('منتجاتي','<div class="text-muted">لا توجد منتجات مفعّلة لهذا الحساب بعد</div>'); return; }
+    glassModal('منتجاتي', prods.map(function(p){
+      return '<div class="glass-row d-flex justify-content-between align-items-center gap-2"><span>'+esc(p.title||p.id)+'</span><button type="button" class="btn btn-sm btn-soft" data-open-prod="'+esc(p.id)+'">فتح</button></div>';
+    }).join(''));
+    document.querySelectorAll('[data-open-prod]').forEach(function(b){
+      b.onclick=function(){
+        document.getElementById('glassBd').classList.remove('open');
+        if(typeof openProduct==='function') openProduct(b.getAttribute('data-open-prod'));
+        else location.href='products.html?id='+encodeURIComponent(b.getAttribute('data-open-prod'));
+      };
+    });
+  };
+}
+
+function originalDeviceId(){
+  var k='misran_device_id_original';
+  try{
+    var o=localStorage.getItem(k);
+    if(o) return o;
+    var cur=localStorage.getItem('misran_device_id');
+    if(cur){ localStorage.setItem(k,cur); return cur; }
+  }catch(e){}
+  return deviceId();
+}
+function isValidSiteId(id){
+  id=String(id||'').trim();
+  // algorithm: u_ + 32 hex from crypto random
+  if(/^u_[a-f0-9]{32}$/i.test(id)) return true;
+  // legacy shorter ids from older generator
+  if(/^u_[a-z0-9]{10,}$/i.test(id)) return true;
+  return false;
+}
+function setActiveDeviceId(id){
+  try{ localStorage.setItem('misran_device_id', id); }catch(e){}
+}
+function renderFloatButtons(){
+  var s=site(), fb=s.floatButtons||{};
+  var bl=document.getElementById('floatBL'); if(bl) bl.remove();
+  var br=document.getElementById('floatBR'); if(br) br.remove();
+  bl=document.createElement('div'); bl.id='floatBL'; bl.className='float-stack-bl';
+  if(fb.intro){ var wrap=document.createElement('div'); wrap.className='float-intro-wrap'; var a=document.createElement('a'); a.className='float-btn intro-btn'; a.href=fb.intro; a.target='_blank'; a.rel='noopener'; a.title='الفيديو التعريفي للموقع'; a.innerHTML='<i class="fas fa-play"></i>'; var lab=document.createElement('span'); lab.className='float-intro-label'; lab.textContent='الفيديو التعريفي'; wrap.appendChild(lab); wrap.appendChild(a); bl.appendChild(wrap); }
+  if(fb.phone){ var a=document.createElement('a'); a.className='float-btn phone'; a.href='tel:'+String(fb.phone).replace(/\s/g,''); a.title='اتصال'; a.innerHTML='<i class="fas fa-phone-alt"></i>'; bl.appendChild(a); }
+  if(fb.youtube){ var a=document.createElement('a'); a.className='float-btn yt'; a.href=fb.youtube; a.target='_blank'; a.rel='noopener'; a.innerHTML='<i class="fab fa-youtube"></i>'; bl.appendChild(a); }
+  if(fb.facebook){ var a=document.createElement('a'); a.className='float-btn fb'; a.href=fb.facebook; a.target='_blank'; a.rel='noopener'; a.innerHTML='<i class="fab fa-facebook-f"></i>'; bl.appendChild(a); }
+  document.body.appendChild(bl);
+  var customs=fb.custom||[];
+  if(customs.length){
+    br=document.createElement('div'); br.id='floatBR'; br.className='float-stack-br';
+    customs.forEach(function(c){
+      if(!c.url) return;
+      var a=document.createElement('a'); a.className='float-btn'; a.href=c.url; a.target='_blank'; a.rel='noopener';
+      if(c.imageUrl) a.innerHTML='<img src="'+esc(driveView(c.imageUrl))+'" alt="">';
+      else a.innerHTML='<i class="fas fa-link"></i>';
+      br.appendChild(a);
+    });
+    document.body.appendChild(br);
+  }
+}
+
+function applyBrand(){
+  var s=site(),name=storeName();
+  document.querySelectorAll('[data-brand]').forEach(function(el){el.textContent=name;});
+  document.querySelectorAll('[data-store-label]').forEach(function(el){el.textContent=storeLabel();});
+  if(s.logoUrl){
+    setFavicon(s.logoUrl);
+    var src=driveView(s.logoUrl);
+    document.querySelectorAll('[data-brand-logo]').forEach(function(el){
+      el.innerHTML='<img src="'+esc(src)+'" style="height:26px;border-radius:5px;object-fit:contain" alt=""> '+esc(name);
+    });
+  }
+  var phone=(s.supportPhone||'').trim();
+  document.querySelectorAll('[data-phone]').forEach(function(el){el.textContent=phone||'—';});
+  document.querySelectorAll('[data-tel]').forEach(function(el){el.href=phone?('tel:'+phone.replace(/\s/g,'')):'#';});
+  // news ribbon
+  var old=document.getElementById('newsRibbon'); if(old) old.remove();
+  var n=((s.news)||[]).find(function(x){return x.active!==false;});
+  if(n && n.text){
+    var bar=document.createElement('div'); bar.id='newsRibbon'; bar.className='news-ribbon';
+    bar.innerHTML=linkify(n.text);
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+function markNav(){
+  var path=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  if(!path||path==='/') path='index.html';
+  document.querySelectorAll('.nav-pill-link').forEach(function(a){
+    var href=(a.getAttribute('href')||'').split('?')[0].split('/').pop().toLowerCase();
+    a.classList.toggle('is-active', href===path || (path===''&&href==='index.html'));
+  });
+  var ind=document.getElementById('navIndicator');
+  var links=document.getElementById('navLinks');
+  var a=document.querySelector('.nav-pill-link.is-active');
+  if(!ind||!links) return;
+  // إجبار الظهور (يتفوق على أي CSS قديم)
+  ind.style.setProperty('display','block','important');
+  ind.style.setProperty('visibility','visible','important');
+  ind.style.setProperty('opacity','1','important');
+  ind.style.setProperty('z-index','0','important');
+  ind.style.setProperty('pointer-events','none','important');
+  ind.style.setProperty('position','absolute','important');
+  ind.style.setProperty('background','#c9a227','important');
+  ind.style.setProperty('background-image','linear-gradient(145deg,#ffe9a8 0%,#f0d060 25%,#e8c547 50%,#c9a227 80%,#a67c00 100%)','important');
+  ind.style.setProperty('border','none','important');
+  ind.style.setProperty('box-shadow','0 3px 14px rgba(201,162,39,.45)','important');
+  ind.style.setProperty('border-radius','999px','important');
+  ind.style.setProperty('box-shadow','0 4px 18px rgba(201,162,39,.55)','important');
+
+  function measure(){
+    if(!a) return null;
+    var lr=links.getBoundingClientRect();
+    var ar=a.getBoundingClientRect();
+    if(ar.width < 4) return null;
+    return {
+      left: Math.round(ar.left - lr.left + (links.scrollLeft||0)),
+      top: Math.round(ar.top - lr.top + (links.scrollTop||0)),
+      width: Math.round(ar.width),
+      height: Math.round(ar.height)
+    };
+  }
+  function setTransition(on){
+    if(on){
+      ind.style.setProperty('transition',
+        'left .7s cubic-bezier(.22,1,.36,1), width .7s cubic-bezier(.22,1,.36,1), top .7s cubic-bezier(.22,1,.36,1), height .7s cubic-bezier(.22,1,.36,1)',
+        'important');
+    } else {
+      ind.style.setProperty('transition','none','important');
+    }
+  }
+  function applyPos(p){
+    if(!p){ ind.style.width='0px'; return; }
+    ind.style.left = p.left + 'px';
+    ind.style.top = p.top + 'px';
+    ind.style.width = p.width + 'px';
+    ind.style.height = p.height + 'px';
+  }
+
+  var target = measure();
+  var saved = null;
+  try{
+    var raw = sessionStorage.getItem('navInd');
+    if(raw){
+      var parts = raw.split('|');
+      if(parts.length >= 4){
+        saved = {
+          left: parseFloat(parts[0])||0,
+          width: parseFloat(parts[1])||0,
+          top: parseFloat(parts[2])||0,
+          height: parseFloat(parts[3])||0
+        };
+      }
+      sessionStorage.removeItem('navInd');
+    }
+  }catch(e){}
+
+  if(saved && saved.width > 4 && target){
+    setTransition(false);
+    applyPos(saved);
+    void ind.offsetWidth;
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        setTimeout(function(){
+          setTransition(true);
+          void ind.offsetWidth;
+          applyPos(target);
+        }, 60);
+      });
+    });
+  } else if(target){
+    setTransition(false);
+    applyPos(target);
+    void ind.offsetWidth;
+  }
+}
+
+function navigateTo(href){
+  var ind=document.getElementById('navIndicator');
+  var links=document.getElementById('navLinks');
+  var active=document.querySelector('.nav-pill-link.is-active');
+  try{
+    if(ind && links && active){
+      var lr=links.getBoundingClientRect();
+      var ar=active.getBoundingClientRect();
+      sessionStorage.setItem('navInd', [
+        Math.round(ar.left - lr.left + (links.scrollLeft||0)),
+        Math.round(ar.width),
+        Math.round(ar.top - lr.top + (links.scrollTop||0)),
+        Math.round(ar.height)
+      ].join('|'));
+      sessionStorage.setItem('misran_nav_pending','1');
+    }
+  }catch(e){}
+  try{ playCurtain(function(){ location.href=href; }); }catch(err){ location.href=href; }
+}
+
+function wireNav(){
+  document.querySelectorAll('.nav-pill-link, .nav-pill-brand, a.btn-hero, a.btn-primary-custom').forEach(function(a){
+    var href=a.getAttribute('href')||'';
+    if(!href||href.indexOf('http')===0||href.charAt(0)==='#'||href.indexOf('mailto:')===0||href.indexOf('tel:')===0) return;
+    a.addEventListener('click',function(e){
+      var dest=href.split('?')[0].toLowerCase();
+      var cur=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+      if(dest===cur) return;
+      e.preventDefault(); navigateTo(href);
+    });
+  });
+}
+
+function getIntroUrl(){
+  try{ var s=site(); return ((s.floatButtons||{}).intro||'').trim(); }catch(e){ return ''; }
+}
+function buildConsentHTML(readonly){
+  var intro = getIntroUrl();
+  var videoBlock = '';
+  if(intro){
+    videoBlock = '<div class="consent-video-row"><a class="btn-watch" href="'+esc(intro)+'" target="_blank" rel="noopener"><i class="fas fa-play"></i> شاهد</a><span class="small text-muted">الفيديو التعريفي للموقع</span></div>';
+  } else {
+    videoBlock = '<div class="small text-muted mb-2">لا يوجد فيديو تعريفي محدد حالياً.</div>';
+  }
+  var dis = readonly ? ' checked disabled' : '';
+  var labClass = readonly ? ' class="readonly"' : '';
+  return '<div class="consent-section"><h4>سياسة الخصوصية</h4><div class="consent-scroll"><p><strong>سياسة الخصوصية — محرك مصران</strong></p><p><strong>مقدمة</strong></p><p>تهدف هذه السياسة إلى بيان كيفية تعامل منصة محرك مصران مع معلومات استخدام الخدمة الرقمية. باستخدامك الموقع فإنك تقر بالاطلاع والموافقة. تُعرَّف المنصة بأنها صفحات وخدمات محرك مصران، والمستخدم بأنه كل من يتصفح أو يفعّل منتجاً، ومعرّف الجهاز بأنه رمز محلي على المتصفح لربط التفعيل.</p><p><strong>النطاق</strong></p><p>تسري على جميع صفحات الموقع الحالية والمستقبلية. لا تشمل مواقع الطرف الثالث المفتوحة عبر روابط خارجية.</p><p><strong>المعلومات</strong></p><p>قد تُعالج: معرّف جهاز محلي، حالة الموافقة، بيانات تقنية عامة غير شخصية، ومعلومات تتبرع بها طوعاً عند التواصل مع الدعم. لا نطلب بطاقة بنكية داخل الصفحات العامة ولا مستندات هوية للتصفح.</p><p><strong>الأغراض</strong></p><p>تشغيل الموقع، تفعيل المنتجات، تحسين التجربة، منع الإساءة، الرد على الدعم، والامتثال عند الاقتضاء. لا بيع لبياناتك.</p><p><strong>التخزين المحلي</strong></p><p>قد يُستخدم التخزين المحلي لحفظ المعرّف والموافقة. يمكنك مسح بيانات الموقع من المتصفح.</p><p><strong>المشاركة</strong></p><p>لا نبيع البيانات. الروابط الخارجية تخضع لسياسات أصحابها. قد يُشارك الحد الأدنى مع جهات تشغيل مساعدة عند الحاجة.</p><p><strong>حقوقك</strong></p><p>طلب التوضيح عبر الدعم، التوقف عن الاستخدام، مسح البيانات المحلية، والإبلاغ عن إساءة استخدام المعرّف.</p><p><strong>الأمن</strong></p><p>عناية معقولة دون ضمان مطلق. احمِ جهازك ولا تشارك معرّفك.</p><p><strong>القُصّر</strong></p><p>الاستخدام بمسؤولية. لولي الأمر التواصل عبر الدعم عند القلق.</p><p><strong>التعديل</strong></p><p>يحق تحديث السياسة. استمرار الاستخدام بعد النشر يعني القبول بالصيغة السارية.</p><p><strong>التواصل</strong></p><p>عبر قنوات الدعم في الموقع مع توضيح الطلب.</p><p><strong>توضيح إضافي (1)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-001. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (2)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-002. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (3)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-003. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (4)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-004. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (5)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-005. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (6)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-006. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (7)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-007. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (8)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-008. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (9)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-009. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (10)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-010. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (11)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-011. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (12)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-012. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (13)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-013. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (14)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-014. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (15)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-015. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (16)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-016. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (17)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-017. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (18)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-018. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (19)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-019. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (20)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-020. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (21)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-021. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (22)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-022. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (23)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-023. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (24)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-024. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (25)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-025. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (26)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-026. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (27)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-027. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (28)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-028. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (29)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-029. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (30)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-030. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (31)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-031. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (32)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-032. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (33)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-033. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (34)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-034. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (35)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-035. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (36)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-036. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (37)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-037. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (38)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-038. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (39)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-039. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (40)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-040. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (41)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-041. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (42)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-042. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (43)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-043. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (44)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-044. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (45)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-045. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (46)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-046. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (47)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-047. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (48)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-048. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (49)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-049. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (50)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-050. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (51)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-051. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (52)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-052. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (53)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-053. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (54)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-054. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (55)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-055. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (56)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-056. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (57)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-057. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (58)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-058. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (59)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-059. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (60)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-060. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (61)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-061. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (62)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-062. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (63)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-063. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (64)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-064. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (65)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-065. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (66)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-066. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (67)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-067. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (68)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-068. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (69)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-069. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (70)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-070. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (71)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-071. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (72)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-072. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (73)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-073. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (74)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-074. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (75)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-075. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (76)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-076. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (77)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-077. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (78)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-078. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p><p><strong>توضيح إضافي (79)</strong></p><p>تأكيداً لمبادئ الشفافية وحماية الخصوصية في منصة محرك مصران، يُعد هذا البند جزءاً مكمّلاً للسياسة. يُنصح بمراجعة الوثيقة دورياً. المرجع MM-PRIV-079. عند التعارض بين ملخص واجهة والنص الكامل يُعتمد النص الكامل ما لم يُعلن خلاف ذلك. نلتزم بعدم جمع بيانات حساسة غير لازمة، وباحترام طلبات المستخدمين المعقولة ضمن الإمكان النظامي والتشغيلي.</p></div></div>'+'<div class="consent-section"><h4>الشروط والأحكام</h4><div class="consent-scroll"><p><strong>الشروط والأحكام — محرك مصران</strong></p><p><strong>القبول</strong></p><p>باستخدام المنصة توافق على هذه الشروط. إن لم توافق فتوقّف عن الاستخدام. يُفترض توفر الأهلية القانونية أو إشراف ولي الأمر حيث يلزم.</p><p><strong>الخدمة</strong></p><p>عرض منتجات رقمية ومحتوى وملفات وخدمات، مجانية أو مدفوعة، مع إمكانية تغيير القوائم والأسعار والعروض.</p><p><strong>معرّف الجهاز</strong></p><p>التفعيل يرتبط بمعرّف يظهر لك. أنت مسؤول عن سريته. النقل بين الأجهزة وفق ما تتيحه الإدارة فقط.</p><p><strong>الأسعار والدفع</strong></p><p>المعتمد هو الظاهر وقت العرض. الشراء شخصي. لا إعادة بيع دون إذن.</p><p><strong>الترخيص</strong></p><p>ترخيص استخدام شخصي غير حصري للمنتج المفعّل، دون إعادة توزيع أو ادّعاء ملكية.</p><p><strong>المحتوى</strong></p><p>للاستخدام المشروع. يُحظر إعادة النشر المضلل. الروابط الخارجية على مسؤوليتك.</p><p><strong>الاستخدام المقبول</strong></p><p>يُحظر مخالفة الأنظمة، الإضرار بالموقع، الانتحال، تجاوز التفعيل، وإساءة قنوات الدعم. للإدارة التقييد عند المخالفة.</p><p><strong>الملكية الفكرية</strong></p><p>العناصر الأصلية للمنصة محمية. التصفح لا ينقل الملكية.</p><p><strong>إخلاء المسؤولية</strong></p><p>الخدمة كما هي. لا ضمان لانقطاع صفري. المسؤولية في حدود ما يسمح به النظام.</p><p><strong>التعديل والإيقاف</strong></p><p>يحق التعديل أو إيقاف جزء من الخدمة. استمرار الاستخدام قبول للصيغة السارية.</p><p><strong>القانون</strong></p><p>تُفسَّر وفق الأنظمة ذات الصلة مع حفظ حقوق المستهلك الإلزامية. يُفضّل الحل الودي عبر الدعم أولاً.</p><p><strong>أحكام عامة</strong></p><p>بطلان بند لا يبطل الباقي. هذه الشروط مع سياسة الخصوصية هما الاتفاق بشأن موضوعهما.</p><p><strong>شرط تكميلي (1)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-001. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (2)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-002. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (3)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-003. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (4)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-004. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (5)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-005. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (6)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-006. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (7)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-007. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (8)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-008. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (9)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-009. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (10)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-010. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (11)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-011. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (12)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-012. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (13)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-013. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (14)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-014. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (15)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-015. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (16)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-016. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (17)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-017. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (18)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-018. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (19)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-019. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (20)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-020. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (21)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-021. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (22)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-022. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (23)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-023. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (24)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-024. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (25)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-025. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (26)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-026. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (27)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-027. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (28)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-028. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (29)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-029. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (30)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-030. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (31)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-031. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (32)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-032. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (33)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-033. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (34)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-034. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (35)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-035. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (36)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-036. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (37)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-037. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (38)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-038. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (39)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-039. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (40)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-040. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (41)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-041. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (42)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-042. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (43)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-043. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (44)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-044. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (45)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-045. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (46)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-046. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (47)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-047. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (48)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-048. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (49)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-049. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (50)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-050. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (51)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-051. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (52)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-052. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (53)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-053. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (54)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-054. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (55)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-055. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (56)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-056. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (57)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-057. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (58)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-058. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (59)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-059. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (60)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-060. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (61)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-061. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (62)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-062. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (63)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-063. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (64)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-064. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (65)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-065. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (66)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-066. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (67)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-067. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (68)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-068. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (69)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-069. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (70)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-070. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (71)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-071. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (72)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-072. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (73)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-073. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (74)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-074. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (75)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-075. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (76)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-076. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (77)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-077. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (78)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-078. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p><p><strong>شرط تكميلي (79)</strong></p><p>يُؤكَّد أن العلاقة بين المستخدم ومنصة محرك مصران تقوم على حسن النية والوضوح. أي منتج رقمي يُعرض يخضع للوصف الظاهر عند التفعيل. المرجع MM-TERM-079. لا يُفسَّر سكوت الإدارة عن مخالفة على أنه تنازل دائم. يظل المستخدم مسؤولاً عن استخدام مشروع للمنتجات بما لا يعتدي على حقوق الغير أو سمعة المنصة.</p></div></div>'+
+    '<div class="consent-section"><h4>الفيديو التعريفي</h4>'+videoBlock+'</div>'+
+    '<div class="consent-checks">'+
+      '<label'+labClass+'><input type="checkbox" id="ckPolicy"'+dis+'> أقر بأنني اطلعت على <strong>سياسة الخصوصية</strong> وأوافق عليها</label>'+
+      '<label'+labClass+'><input type="checkbox" id="ckTerms"'+dis+'> أقر بأنني اطلعت على <strong>الشروط والأحكام</strong> وأوافق عليها</label>'+
+      '<label'+labClass+'><input type="checkbox" id="ckVideo"'+dis+'> أقر بمعرفتي بوجود <strong>الفيديو التعريفي للموقع</strong></label>'+
+    '</div>';
+}
+function ensureConsentUI(){
+  if(document.getElementById('consentOverlay')) return;
+  var ov=document.createElement('div'); ov.id='consentOverlay'; ov.className='consent-overlay';
+  ov.innerHTML='<div class="consent-card" role="dialog" aria-modal="true">'+
+    '<header><span id="consentTitle">مرحباً بك</span><span></span></header>'+
+    '<div class="consent-body" id="consentBody"></div>'+
+    '<div class="consent-footer" id="consentFooter"></div></div>';
+  document.body.appendChild(ov);
+}
+function updateConfirmState(){
+  var b=document.getElementById('consentConfirm');
+  if(!b) return;
+  var a=document.getElementById('ckPolicy');
+  var t=document.getElementById('ckTerms');
+  var v=document.getElementById('ckVideo');
+  var ok=a&&t&&v&&a.checked&&t.checked&&v.checked;
+  b.classList.toggle('ready', !!ok);
+}
+function openConsent(readonly){
+  ensureConsentUI();
+  var ov=document.getElementById('consentOverlay');
+  document.getElementById('consentTitle').textContent = readonly ? 'السياسة والشروط' : 'مرحباً بك — يرجى الموافقة للمتابعة';
+  document.getElementById('consentBody').innerHTML = buildConsentHTML(!!readonly);
+  var foot=document.getElementById('consentFooter');
+  if(readonly){
+    foot.innerHTML='<button type="button" class="btn-confirm ready" id="consentCloseBtn" style="opacity:1;pointer-events:auto">إغلاق</button>';
+    document.getElementById('consentCloseBtn').onclick=function(){ ov.classList.remove('open'); };
+  } else {
+    foot.innerHTML='<button type="button" class="btn-confirm" id="consentConfirm">تأكيد والمتابعة</button>';
+    ['ckPolicy','ckTerms','ckVideo'].forEach(function(id){
+      var el=document.getElementById(id); if(el) el.addEventListener('change', updateConfirmState);
+    });
+    document.getElementById('consentConfirm').onclick=function(){
+      if(!this.classList.contains('ready')) return;
+      try{ localStorage.setItem('misran_consent_v1','1'); }catch(e){}
+      ov.classList.remove('open');
+    };
+    updateConfirmState();
+  }
+  ov.classList.add('open');
+}
+function maybeShowFirstConsent(){
+  try{
+    if(localStorage.getItem('misran_consent_v1')==='1') return;
+  }catch(e){}
+  openConsent(false);
+}
+function ensureSettingsGear(){ /* removed */ }
+
+
+function setupNavScrollHide(){
+  var wrap=document.querySelector('.nav-wrap');
+  if(!wrap) return;
+  var btn=document.getElementById('navShowBtn');
+  if(!btn){
+    btn=document.createElement('button');
+    btn.id='navShowBtn'; btn.type='button'; btn.className='nav-show-btn';
+    btn.innerHTML='<i class="fas fa-chevron-down"></i>'; btn.title='إظهار القائمة';
+    document.body.appendChild(btn);
+  }
+  var hidden=false, lastY=0, acc=0;
+  function setHidden(on){
+    hidden=!!on;
+    wrap.classList.toggle('nav-hidden', hidden);
+    btn.classList.toggle('visible', hidden);
+  }
+  btn.onclick=function(){ setHidden(false); window.scrollTo({top:0,behavior:'smooth'}); };
+  window.addEventListener('scroll', function(){
+    var y=window.scrollY||0;
+    var dy=y-lastY;
+    lastY=y;
+    if(y<40){ setHidden(false); acc=0; return; }
+    if(dy>6){ acc+=dy; if(acc>24) setHidden(true); }
+    else if(dy<-8){ acc=0; setHidden(false); }
+  }, {passive:true});
+}
+
+
+
+function initChrome(){
+  try{ wireGoldenDownloads(document); }catch(e){}
+
+  applyBrand();
+  if(typeof renderUserChip==='function') renderUserChip();
+  if(typeof renderFloatButtons==='function') renderFloatButtons();
+  markNav(); wireNav(); setupNavScrollHide();
+  if(typeof maybeShowFirstConsent==='function') maybeShowFirstConsent();
+  var tg=document.getElementById('navToggle');
+  if(tg) tg.onclick=function(){var n=document.getElementById('navLinks'); if(n) n.classList.toggle('open'); setTimeout(markNav,40);};
+  window.addEventListener('resize',markNav);
+  setTimeout(markNav,50);
+  setTimeout(markNav,300);
+  setTimeout(markNav,800);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){markNav();});
+}
+function paginate(list, page, per){
+  var total=Math.max(1, Math.ceil(list.length/per)||1);
+  page=Math.min(Math.max(1,page), total);
+  return {items:list.slice((page-1)*per, page*per), page:page, total:total};
+}
+function renderPager(el, page, total, onPage){
+  if(!el) return;
+  if(total<=1){el.innerHTML='';return;}
+  var html='<button type="button" '+(page<=1?'disabled':'')+' data-p="'+(page-1)+'">‹</button>';
+  for(var i=1;i<=total;i++) html+='<button type="button" class="'+(i===page?'active':'')+'" data-p="'+i+'">'+i+'</button>';
+  html+='<button type="button" '+(page>=total?'disabled':'')+' data-p="'+(page+1)+'">›</button>';
+  el.innerHTML=html;
+  el.querySelectorAll('button[data-p]').forEach(function(b){b.onclick=function(){if(!b.disabled) onPage(+b.getAttribute('data-p'));};});
+}
+document.addEventListener('DOMContentLoaded', function(){ initChrome(); });
+</script>
+<script>
+
+document.addEventListener('DOMContentLoaded',function(){
+  try{ wireGoldenDownloads(document); setTimeout(function(){ wireGoldenDownloads(document); }, 500); }catch(e){}
+
+  var pageP=1, pageG=1, PER=8, lastFilter='', selectedF=new Set(), selectedGF=new Set(), priceMode='all', priceMin=0, priceMax=0, priceCap=0;
+  var galTimer=null, galProg=null, galIdx=0, galPausedUntil=0, galItems=[], galUserStopped=false;
+
+  function filters(kind){
+    var src = (kind==='game') ? (SITE_DATA.gameFilters||[]) : (SITE_DATA.storeFilters||[]);
+    return src.map(function(f,i){
+      if(typeof f!=='object') return {id:'flt-'+i, name:String(f)};
+      if(!f.id) f.id = f.name ? ('flt-'+String(f.name).replace(/\s+/g,'-')) : ('flt-'+i);
+      return f;
+    });
+  }
+  function itemType(p){ return (p && p.type==='game') ? 'game' : 'product'; }
+
+
+  // بحث ذكي: تطبيع عربي + تسامح أخطاء بسيطة
+  function norm(s){
+    s = String(s||'').toLowerCase()
+      .replace(/[أإآا]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه')
+      .replace(/[ًٌٍَُِّْ]/g,'').replace(/[^\u0600-\u06FFa-z0-9\s_-]/g,' ')
+      .replace(/\s+/g,' ').trim();
+    return s;
+  }
+  function tokens(s){ return norm(s).split(' ').filter(Boolean); }
+  function fuzzyMatch(query, text){
+    query = norm(query); text = norm(text);
+    if(!query) return true;
+    if(text.indexOf(query) >= 0) return true;
+    var qt = tokens(query), tt = tokens(text);
+    if(!qt.length) return true;
+    var hit = 0;
+    qt.forEach(function(q){
+      for(var i=0;i<tt.length;i++){
+        if(tt[i].indexOf(q)>=0 || q.indexOf(tt[i])>=0){ hit++; break; }
+        // تسامح حرف واحد للكلمات الطويلة
+        if(q.length>=4 && tt[i].length>=4){
+          var d=0, a=tt[i], b=q, m=Math.min(a.length,b.length);
+          if(Math.abs(a.length-b.length)>1) continue;
+          for(var k=0;k<m;k++) if(a[k]!==b[k]) d++;
+          d += Math.abs(a.length-b.length);
+          if(d<=1){ hit++; break; }
+        }
+      }
+    });
+    return hit >= Math.ceil(qt.length * 0.6);
+  }
+
+
+  function getEffectivePrice(p){
+    if(!p) return 0;
+    if(p.isFree) return 0;
+    if(p.offerEnabled && p.offerPrice!=null && p.offerPrice!==''){
+      var o = Number(p.offerPrice);
+      if(!isNaN(o)) return o;
+    }
+    var pr = Number(p.price);
+    if(isNaN(pr) || pr < 0) pr = 0;
+    return pr;
+  }
+  function isProductFree(p){
+    if(p.isFree) return true;
+    return getEffectivePrice(p) <= 0 && !p.offerEnabled;
+  }
+  function computePriceCap(){
+    var max = 0;
+    (SITE_DATA.products||[]).forEach(function(p){
+      if(p.status==='hidden') return;
+      var pr = getEffectivePrice(p);
+      if(pr > max) max = pr;
+    });
+    if(max < 10) max = 100;
+    // تقريب لأعلى
+    max = Math.ceil(max / 10) * 10;
+    return max;
+  }
+
+  function allProducts(kind){
+    var list=(SITE_DATA.products||[]).filter(function(p){return p.status!=='hidden';});
+    if(kind==='game') list = list.filter(function(p){ return itemType(p)==='game'; });
+    else if(kind==='product') list = list.filter(function(p){ return itemType(p)==='product'; });
+    list = list.slice().sort(function(a,b){
+      var ka = String(a.id||''); var kb = String(b.id||'');
+      return (ka.charCodeAt(ka.length-1)||0) - (kb.charCodeAt(kb.length-1)||0);
+    });
+    if(lastFilter.trim()){
+      list = list.filter(function(p){
+        var blob = [p.id, p.title, p.description, p.filter, p.createdBy, (p.filterIds||[]).join(' ')].join(' ');
+        return fuzzyMatch(lastFilter, blob);
+      });
+    }
+    var sel = (kind==='game') ? selectedGF : selectedF;
+    var fs = filters(kind);
+    if(sel.size){
+      list=list.filter(function(p){
+        var ids=p.filterIds||[];
+        for(var i=0;i<ids.length;i++) if(sel.has(ids[i])) return true;
+        if(p.filter){
+          for(var j=0;j<fs.length;j++){
+            var f=fs[j];
+            if(sel.has(f.id) && (p.filter===f.name || p.filter===f.id)) return true;
+          }
+        }
+        return false;
+      });
+    }
+    if(priceMode === 'free'){
+      list = list.filter(function(p){ return isProductFree(p); });
+    } else if(priceMode === 'paid'){
+      list = list.filter(function(p){
+        if(isProductFree(p)) return false;
+        var pr = getEffectivePrice(p);
+        return pr >= priceMin && pr <= priceMax;
+      });
+    }
+    return list;
+  }
+
+  function renderFilters(){
+    var bar=document.getElementById('storeFilters');
+    if(!priceCap){
+      priceCap = computePriceCap();
+      if(!priceMax || priceMax > priceCap) priceMax = priceCap;
+    }
+    // الشريط الجانبي: التسعير فقط
+    if(bar){
+      var html = '<div class="small fw-bold mb-2 text-muted">التسعير</div>';
+      html += '<label class="filter-chip '+(priceMode==='all'?'on':'')+'"><input type="radio" name="priceMode" value="all" '+(priceMode==='all'?'checked':'')+'> الكل</label>';
+      html += '<label class="filter-chip '+(priceMode==='free'?'on':'')+'"><input type="radio" name="priceMode" value="free" '+(priceMode==='free'?'checked':'')+'> مجاني</label>';
+      html += '<label class="filter-chip '+(priceMode==='paid'?'on':'')+'"><input type="radio" name="priceMode" value="paid" '+(priceMode==='paid'?'checked':'')+'> مدفوع</label>';
+      if(priceMode==='paid'){
+        html += '<div class="price-range-box mt-2">'+
+          '<div class="d-flex justify-content-between small mb-1"><span>من: <strong id="priceMinLbl">'+priceMin+'</strong></span><span>إلى: <strong id="priceMaxLbl">'+priceMax+'</strong></span></div>'+
+          '<input type="range" id="priceMinRange" class="form-range price-range" min="0" max="'+priceCap+'" value="'+priceMin+'">'+
+          '<input type="range" id="priceMaxRange" class="form-range price-range mt-1" min="0" max="'+priceCap+'" value="'+priceMax+'">'+
+          '</div>';
+      }
+      bar.innerHTML = html;
+      bar.querySelectorAll('input[name="priceMode"]').forEach(function(inp){
+        inp.onchange=function(){ if(!inp.checked) return; priceMode=inp.value; if(priceMode==='paid'){ priceCap=computePriceCap(); priceMin=0; priceMax=priceCap; } pageP=1; pageG=1; renderFilters(); render(); };
+      });
+      var rMin=document.getElementById('priceMinRange'), rMax=document.getElementById('priceMaxRange');
+      function sync(){
+        var a=rMin?+rMin.value:priceMin, b=rMax?+rMax.value:priceMax;
+        if(a>b){ var t=a;a=b;b=t; } priceMin=a; priceMax=b;
+        var x=document.getElementById('priceMinLbl'), y=document.getElementById('priceMaxLbl');
+        if(x) x.textContent=priceMin; if(y) y.textContent=priceMax;
+        pageP=1; pageG=1; render();
+      }
+      if(rMin) rMin.oninput=sync; if(rMax) rMax.oninput=sync;
+    }
+    function paintTypeFilters(kind, boxId, selected){
+      var box=document.getElementById(boxId); if(!box) return;
+      var fs=filters(kind);
+      var html='<label class="filter-chip '+(selected.size===0?'on':'')+'"><input type="checkbox" data-all="1" '+(selected.size===0?'checked':'')+'> الكل</label>';
+      fs.forEach(function(f){
+        var on=selected.has(f.id);
+        html += '<label class="filter-chip '+(on?'on':'')+'"><input type="checkbox" data-f="'+esc(f.id)+'" '+(on?'checked':'')+'> '+esc(f.name)+'</label>';
+      });
+      box.innerHTML=html;
+      box.querySelectorAll('[data-all]').forEach(function(inp){
+        inp.onchange=function(){ if(inp.checked) selected.clear(); pageP=1; pageG=1; renderFilters(); render(); };
+      });
+      box.querySelectorAll('[data-f]').forEach(function(inp){
+        inp.onchange=function(){
+          if(inp.checked) selected.add(inp.getAttribute('data-f')); else selected.delete(inp.getAttribute('data-f'));
+          pageP=1; pageG=1; renderFilters(); render();
+        };
+      });
+    }
+    paintTypeFilters('product','productFilters', selectedF);
+    paintTypeFilters('game','gameFilters', selectedGF);
+  }
+
+  function priceHtml(p){
+    var free=p.isFree||(!p.price && !p.offerPrice);
+    if(free) return '<div class="project-price free">مجاني</div>';
+    if(p.offerEnabled && (p.offerPrice!=null && p.offerPrice!=='')){
+      return '<div class="price-offer"><span class="old">'+(p.price||0)+' ج.م</span><span class="new">'+(p.offerPrice)+' ج.م</span></div>';
+    }
+    return '<div class="project-price">'+(p.price||0)+' ج.م</div>';
+  }
+
+  function tile(p){
+    var th=p.thumbUrl?driveView(p.thumbUrl):(p.imageUrl?driveView(p.imageUrl):'');
+    var owned=userOwns(p.id);
+    return '<div class="col-md-6 col-lg-4"><div class="product-tile">'+
+      '<div class="pthumb" style="position:relative;'+(th?"background-image:url('"+th.replace(/'/g,"%27")+"')":'')+'">'+(owned?'<span class="owned-badge">من المشتريات</span>':'')+'</div>'+
+      '<div class="pbody">'+
+        '<div class="title fw-bold">'+esc(p.title)+'</div>'+
+        '<div class="small mb-1">'+idCopyHtml(p.id)+'</div>'+
+        priceHtml(p)+
+        (p.createdBy ? ('<div class="small text-muted mt-1 creator-line">تم إنشاؤه بواسطة <a href="#" class="creator-link" data-creator="'+esc(p.createdById||p.createdBy)+'" data-creator-name="'+esc(p.createdBy)+'">'+esc(p.createdBy)+'</a></div>') : '')+
+        '<button type="button" class="btn btn-primary-custom text-white btn-sm mt-auto" data-open="'+esc(p.id)+'">عرض المنتج</button>'+
+      '</div></div></div>';
+  }
+
+  function stopGal(){ if(galProg) clearInterval(galProg); galProg=null; }
+  function startGalAuto(){
+    stopGal();
+    galUserStopped = false;
+    var bar=document.getElementById('galBar');
+    if(!bar || galItems.length<=1) return;
+    var start=Date.now();
+    var DUR=5000;
+    galProg=setInterval(function(){
+      if(galUserStopped){ bar.style.width='0%'; return; }
+      var t=(Date.now()-start)/DUR;
+      if(t>=1){ t=0; start=Date.now(); galIdx=(galIdx+1)%galItems.length; showGal(galIdx,false); }
+      bar.style.width = Math.min(100, t*100)+'%';
+    }, 40);
+  }
+  function showGal(i, user){
+    galIdx=i;
+    var main=document.getElementById('galMain');
+    if(main) main.src=driveView(galItems[i]||'');
+    document.querySelectorAll('#galThumbs img').forEach(function(img,idx){ img.classList.toggle('on', idx===i); });
+    if(user){
+      galUserStopped = true;
+      stopGal();
+      var bar=document.getElementById('galBar'); if(bar) bar.style.width='0%';
+    }
+  }
+
+  function shareButtons(url, title){
+    return '<div class="share-row mt-2">'+
+      '<button type="button" class="btn btn-soft btn-sm" id="btnShareCopy"><i class="fas fa-link"></i> نسخ رابط</button>'+
+      '<button type="button" class="btn btn-soft btn-sm" id="btnShareOpen"><i class="fas fa-share-alt"></i> مشاركة</button>'+
+      '<div id="shareApps" class="share-apps d-none w-100 mt-1">'+
+        '<a class="btn btn-soft btn-sm" target="_blank" rel="noopener" data-app="wa"><i class="fab fa-whatsapp"></i> واتساب</a>'+
+        '<a class="btn btn-soft btn-sm" target="_blank" rel="noopener" data-app="tg"><i class="fab fa-telegram-plane"></i> تيليجرام</a>'+
+        '<a class="btn btn-soft btn-sm" target="_blank" rel="noopener" data-app="fb"><i class="fab fa-facebook"></i> فيسبوك</a>'+
+        '<a class="btn btn-soft btn-sm" target="_blank" rel="noopener" data-app="tw"><i class="fab fa-x-twitter"></i> X</a>'+
+        '<a class="btn btn-soft btn-sm" target="_blank" rel="noopener" data-app="mail"><i class="fas fa-envelope"></i> إيميل</a>'+
+      '</div>'+
+    '</div>';
+  }
+
+  window.openProduct=function openProduct(id){
+    var found=findById(id); if(!found||found.type!=='product') return;
+    var p=found.item;
+    var imgs=[];
+    if(p.thumbUrl) imgs.push(p.thumbUrl);
+    else if(p.imageUrl) imgs.push(p.imageUrl);
+    (p.gallery||p.images||[]).forEach(function(u){
+      var url = typeof u==='string' ? u : (u && u.url) || '';
+      if(url && imgs.indexOf(url)<0) imgs.push(url);
+    });
+    galItems=imgs.filter(Boolean);
+    if(!galItems.length) galItems=[''];
+    var free=p.isFree||(!p.price && p.price!==0 && !p.offerPrice);
+    free = p.isFree || (Number(p.price)===0 && !p.offerEnabled);
+    var owned=userOwns(p.id);
+    var shareUrl = location.origin + location.pathname.replace(/[^/]*$/, 'products.html') + '?id=' + encodeURIComponent(p.id);
+    try{ history.replaceState(null,'','products.html?id='+encodeURIComponent(p.id)); }catch(e){}
+
+    var filesBlock = '';
+    if(free || owned){
+      filesBlock = '<button type="button" class="btn btn-success btn-sm mt-2" id="btnShowFiles"><i class="fas fa-download"></i> عرض ملفات التحميل</button>'+
+        '<div id="filesPanel" class="d-none mt-2"></div>';
+    } else {
+      var pay=(SITE_DATA.site&&SITE_DATA.site.paymentText)||SITE_DATA.paymentText||'';
+      filesBlock = '<div class="glass-row mt-3"><div class="fw-bold mb-1">للشراء / التفعيل</div>'+
+        (pay ? '<div class="desc-links" style="white-space:pre-wrap;line-height:1.8">'+linkify(pay)+'</div>' : '<div class="text-muted small">تواصل مع الدعم لتفعيل المنتج</div>')+
+        '</div>';
+    }
+
+    var thumbs=galItems.map(function(u,i){return '<img src="'+esc(driveView(u))+'" data-i="'+i+'" class="'+(i===0?'on':'')+'" alt="">';}).join('');
+    glassModal(p.title||'منتج',
+      '<div class="gallery-wrap"><img id="galMain" class="gallery-main" src="'+esc(driveView(galItems[0]||''))+'" alt="">'+
+        '<div class="gallery-progress"><span id="galBar"></span></div></div>'+
+      (galItems.length>1?'<div class="gallery-thumbs" id="galThumbs">'+thumbs+'</div>':'')+
+      '<div class="mt-2">'+idCopyHtml(p.id)+'</div>'+
+      priceHtml(p)+
+      (p.createdBy ? ('<div class="small text-muted mt-2">تم إنشاؤه بواسطة <a href="#" class="creator-link" data-creator="'+esc(p.createdById||p.createdBy)+'" data-creator-name="'+esc(p.createdBy)+'">'+esc(p.createdBy)+'</a></div>') : '')+
+      '<div class="desc-links mt-2" style="white-space:pre-wrap;line-height:1.8">'+linkify(p.description||'')+'</div>'+
+      filesBlock+
+      shareButtons(shareUrl, p.title)
+    );
+    setTimeout(function(){
+      wireCopy(document.getElementById('glassBd'));
+      document.querySelectorAll('#glassBd .creator-link').forEach(function(a){
+        a.onclick=function(e){ e.preventDefault(); openCreator(a.getAttribute('data-creator'), a.getAttribute('data-creator-name')); };
+      });
+    }, 0);
+    document.querySelectorAll('#galThumbs img').forEach(function(img){
+      img.onclick=function(){ showGal(+img.getAttribute('data-i'), true); };
+    });
+    var btnFiles=document.getElementById('btnShowFiles');
+    if(btnFiles){
+      btnFiles.onclick=function(){
+        var panel=document.getElementById('filesPanel');
+        if(!panel) return;
+        panel.classList.remove('d-none');
+        var files=p.files||[];
+        panel.innerHTML = files.length ? files.map(function(f){
+          return '<div class="glass-row d-flex justify-content-between align-items-center gap-2"><span>'+esc(f.title||'ملف')+'</span><a class="btn btn-sm btn-success" href="'+driveDl(f.url)+'" data-dl-title="'+esc(f.title||'ملف')+'" download target="_blank" rel="noopener">تحميل</a></div>';
+        }).join('') : '<div class="text-muted small">لا ملفات مرفقة</div>';
+      };
+    }
+    var btnCopy=document.getElementById('btnShareCopy');
+    if(btnCopy){
+      btnCopy.onclick=function(){
+        var link = location.href;
+        function ok(){ btnCopy.innerHTML='<i class="fas fa-check"></i> تم النسخ'; setTimeout(function(){ btnCopy.innerHTML='<i class="fas fa-link"></i> نسخ رابط'; },1200); }
+        function silent(){ try{ var a=document.createElement('textarea'); a.value=link; a.setAttribute('readonly',''); a.style.cssText='position:fixed;left:-9999px;opacity:0'; document.body.appendChild(a); a.select(); document.execCommand('copy'); document.body.removeChild(a); ok(); }catch(e){} }
+        if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(ok).catch(silent);
+        else silent();
+      };
+    }
+    var btnShare=document.getElementById('btnShareOpen');
+    if(btnShare){
+      btnShare.onclick=function(){
+        var panel=document.getElementById('shareApps');
+        if(!panel) return;
+        panel.classList.toggle('d-none');
+        var link = location.href;
+        var title = p.title||'';
+        var u = encodeURIComponent(link), tt = encodeURIComponent(title);
+        panel.querySelectorAll('[data-app]').forEach(function(a){
+          var app=a.getAttribute('data-app');
+          if(app==='wa') a.href='https://wa.me/?text='+tt+'%20'+u;
+          if(app==='tg') a.href='https://t.me/share/url?url='+u+'&text='+tt;
+          if(app==='fb') a.href='https://www.facebook.com/sharer/sharer.php?u='+u;
+          if(app==='tw') a.href='https://twitter.com/intent/tweet?url='+u+'&text='+tt;
+          if(app==='mail') a.href='mailto:?subject='+tt+'&body='+u;
+        });
+      };
+    }
+    galIdx=0; galUserStopped=false; startGalAuto();
+  };
+
+  function render(){
+    function paint(kind, gridId, pagerId, pageRef){
+      var list=allProducts(kind);
+      var page = kind==='game' ? pageG : pageP;
+      var pg=paginate(list, page, PER);
+      if(kind==='game') pageG=pg.page; else pageP=pg.page;
+      var grid=document.getElementById(gridId);
+      if(grid) grid.innerHTML=pg.items.map(tile).join('')||'<div class="col-12 text-muted">'+(kind==='game'?'لا ألعاب':'لا منتجات')+'</div>';
+      if(grid){
+        grid.querySelectorAll('[data-open]').forEach(function(b){ b.onclick=function(){ openProduct(b.getAttribute('data-open')); }; });
+        wireCopy(grid);
+        grid.querySelectorAll('.creator-link').forEach(function(a){
+          a.onclick=function(e){
+            e.preventDefault();
+            openCreator(a.getAttribute('data-creator'), a.getAttribute('data-creator-name'));
+          };
+        });
+      }
+      renderPager(document.getElementById(pagerId), pg.page, pg.total, function(p){
+        if(kind==='game') pageG=p; else pageP=p;
+        render();
+      });
+    }
+    paint('product','gridProducts','pagerProducts');
+    paint('game','gridGames','pagerGames');
+  }
+  function openCreator(id, name){
+    var all=(SITE_DATA.products||[]).filter(function(p){
+      if(p.status==='hidden') return false;
+      return p.createdById===id || p.createdBy===name || p.createdBy===id;
+    });
+    var prods=all.filter(function(p){ return itemType(p)==='product'; });
+    var games=all.filter(function(p){ return itemType(p)==='game'; });
+    function listHtml(arr, label){
+      if(!arr.length) return '<div class="small text-muted mb-2">لا '+label+'</div>';
+      return '<div class="small fw-bold mb-1">'+label+'</div>'+arr.map(function(p){
+        return '<button type="button" class="btn btn-soft btn-sm w-100 mb-1 text-start creator-open" data-id="'+esc(p.id)+'">'+esc(p.title||p.id)+'</button>';
+      }).join('');
+    }
+    var html = '<div class="mb-2">عرض أعمال: <strong>'+esc(name||id||'')+'</strong></div>'+
+      listHtml(prods,'المنتجات')+listHtml(games,'الألعاب');
+    if(typeof glassModal==='function'){
+      glassModal('تم إنشاؤه بواسطة', html);
+      setTimeout(function(){
+        document.querySelectorAll('.creator-open').forEach(function(b){
+          b.onclick=function(){ openProduct(b.getAttribute('data-id')); };
+        });
+      }, 50);
+    }
+  }
+
+
+  var searchEl=document.getElementById('search');
+  var searchTimer=null;
+  searchEl.addEventListener('input', function(){
+    clearTimeout(searchTimer);
+    searchTimer=setTimeout(function(){ lastFilter=searchEl.value; pageP=1; pageG=1; render(); }, 180);
+  });
+
+  renderFilters(); render();
+  var id=q('id'); if(id) openProduct(id);
+});
+
+
+(function(){
+  if(window.misranDlObserver) return;
+  window.misranDlObserver=1;
+  document.addEventListener('DOMContentLoaded', function(){
+    try{ wireGoldenDownloads(document); }catch(e){}
+    try{
+      var mo=new MutationObserver(function(){ try{ wireGoldenDownloads(document); }catch(e){} });
+      mo.observe(document.body,{childList:true,subtree:true});
+    }catch(e){}
+  });
+})();
+
+</script>
+</body></html>
