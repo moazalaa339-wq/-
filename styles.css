@@ -2061,3 +2061,12 @@ img, video, iframe, svg {
 .creator-link{color:#c9a227;font-weight:700;text-decoration:none}
 .creator-link:hover{text-decoration:underline;color:#a67c00}
 .creator-line{line-height:1.4}
+
+#storeTypeTabs .nav-link{
+  border-radius:999px;font-weight:700;padding:.45rem 1.1rem;
+  border:1px solid rgba(201,162,39,.35);color:#1a1410;background:#fffcf7;
+}
+#storeTypeTabs .nav-link.active{
+  background:linear-gradient(135deg,#e8c547,#c9a227);border-color:transparent;color:#1a1410;
+  box-shadow:0 4px 14px rgba(201,162,39,.35);
+}
